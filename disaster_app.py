@@ -13,23 +13,20 @@ import os
 from itertools import combinations
 
 # --- Configuration ---
-MODEL_FILENAME = "disaster_analysis_model.h5"
+MODEL_FILENAME = "duong/dan/toi/file/disaster_analysis_model.h5"
+
 CLASS_NAMES = ["Không Thiệt hại", "Thiệt hại Nhẹ", "Thiệt hại Trung bình", "Thiệt hại Nghiêm trọng"]
 IMAGE_SIZE = (224, 224)
 
 # --- AI Model Section ---
 @st.cache_resource
 def load_analysis_model(model_path):
-    if not os.path.exists(model_path):
-        st.error(f"Lỗi: Không tìm thấy mô hình tại '{model_path}'.")
-        return None
-    try:
-        model = tf.keras.models.load_model(model_path, compile=False)
-        return model
-    except Exception as e:
-        st.error(f"Lỗi khi tải mô hình: {e}")
-        return None
-
+    class MockModel:
+        def predict(self, input):
+            # Trả về xác suất ngẫu nhiên cho 4 lớp
+            probs = np.random.dirichlet(np.ones(len(CLASS_NAMES)), size=1)
+            return probs
+    return MockModel()
 def analyze_image(image_bytes, model):
     if model is None:
         st.error("Mô hình chưa được tải.")
