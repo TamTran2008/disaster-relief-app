@@ -1,6 +1,6 @@
 streamlit
 tensorflow
-opencv-python
+numpy
 networkx
 geopy
 Pillow
