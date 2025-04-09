@@ -4,3 +4,4 @@ opencv-python
 networkx
 geopy
 Pillow
+opencv-python
